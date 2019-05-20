@@ -7,4 +7,4 @@ Write a function that reverses an array so that the initial values are in revers
 We wrote a 'for' loop that works it's way from the outside of the array in, switches the values, and adds it to a new array. It is fairly efficient and loops through as mamy times as half the length of the array.
 
 ## Solution
-![hello](assets/reverse-array.jpg)
+![hello](./assets/reverse-array.jpg)
