@@ -1,7 +1,7 @@
 'use strict';
 
 function searchArray(arr, val) {
-
+ 
 }
 
 describe('Testing code challenge: Array binary search', () => {
