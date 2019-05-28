@@ -7,27 +7,21 @@ function searchArray(arr, num) {
 
   while(true) {
     cur = Math.ceil(((right - left) / 2) + left);
-    console.log('checking...');
     if (num === arr[0]) {
-      console.log('found it!');
       cur = 0;
       break;
     }
     else if ((left === right - 1) && (arr[left] !== num && arr[right] !== num)) {
-      console.log('not found');
       cur = -1;
       break;
     }
     else if (num > arr[cur]) {
-      console.log('too low');
       left = cur;
     }
     else if (num < arr[cur]) {
-      console.log('too high');
       right = cur;
     }
     else if (num === arr[cur]) {
-      console.log('found it!');
       break;
     }
   }

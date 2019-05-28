@@ -195,7 +195,6 @@ describe('Testing linked list insertions', () => {
     list.insert(2);
     list.insert(1);
     list.delete(2);
-    console.log(list);
     expect(list.Head.Next.Value).toStrictEqual(3);
   });
 
@@ -214,7 +213,6 @@ describe('Testing linked list insertions', () => {
     list.insert(2);
     list.insert(1);
     list.delete(3);
-    console.log(list);
     expect(list.Head.Next.Next).toStrictEqual(null);
   });
 });
