@@ -3,6 +3,7 @@
 class LinkedList {
   constructor() {
     this.Head = null;
+    this.length = 0;
   }
 
   insert(value) {
@@ -11,6 +12,7 @@ class LinkedList {
       newNode.Next = this.Head;
     }
     this.Head = newNode;
+    this.length++;
   }
 
   includes(value) {
@@ -47,6 +49,7 @@ class LinkedList {
       }
       else {
         Current.Next = newNode;
+        this.length++;
         break;
       }
     }
@@ -75,6 +78,7 @@ class LinkedList {
         throw('Can\'t insert before a value that isn\'t in the list');
       }
     }
+    this.length++;
   }
 
   insertAfter(value, valueToInsert) {
@@ -85,6 +89,7 @@ class LinkedList {
       if(Current.Value === value) {
         newNode.Next = Current.Next;
         Current.Next = newNode;
+        this.length++;
         return;
       }
       else {
@@ -100,12 +105,14 @@ class LinkedList {
 
     if(value === this.Head.Value) {
       this.Head = this.Head.Next;
+      this.length--;
       return;
     }
     else {
       while(Current !== null) {
         if(Current.Next.Value === value) {
           Current.Next = Current.Next.Next;
+          this.length--;
           return;
         }
         else {
@@ -114,6 +121,36 @@ class LinkedList {
       }
     }
     throw('oops!');
+  }
+
+  countFromEnd(k) {
+    if(k > this.length - 1 || !this.length > 0 || k < 0) {
+      return 'Error: specified index is not in list';
+    }
+    else {
+      let Current = this.Head;
+
+      for(let i = 0; i < this.length - k - 1; i++) {
+        Current = Current.Next;
+      }
+
+      return Current.Value;
+    }
+  }
+
+  findCenter() {
+    if(this.length < 1) {
+      return 'Error: Invalid list';
+    }
+    else {
+      let Current = this.Head;
+
+      for(let i = 0; i < Math.ceil((this.length -1) / 2); i++) {
+        Current = Current.Next;
+      }
+
+      return Current.Value;
+    }
   }
 }
 
@@ -214,5 +251,77 @@ describe('Testing linked list insertions', () => {
     list.insert(1);
     list.delete(3);
     expect(list.Head.Next.Next).toStrictEqual(null);
+  });
+});
+
+describe('Testing k-th value from end', () => {
+  it('Returns error if index is not in list', () => {
+    let list = new LinkedList();
+    list.insert(3);
+    list.insert(2);
+    list.insert(1);
+    expect(list.countFromEnd(3)).toStrictEqual('Error: specified index is not in list');
+  });
+  it('Returns error if k is equal to list.length', () => {
+    let list = new LinkedList();
+    list.insert(3);
+    list.insert(2);
+    list.insert(1);
+    expect(list.countFromEnd(3)).toStrictEqual('Error: specified index is not in list');
+  });
+  it('Returns error if k is not a positive integer', () => {
+    let list = new LinkedList();
+    list.insert(3);
+    list.insert(2);
+    list.insert(1);
+    expect(list.countFromEnd(-2)).toStrictEqual('Error: specified index is not in list');
+  });
+  it('Successfully runs when the list has a length of 1', () => {
+    let list = new LinkedList();
+    list.insert(1);
+    expect(list.countFromEnd(0)).toStrictEqual(1);
+  });
+  it('Successfully runs if k is in the middle of the list', () => {
+    let list = new LinkedList();
+    list.insert(6);
+    list.insert(5);
+    list.insert(4);
+    list.insert(3);
+    list.insert(2);
+    list.insert(1);
+    expect(list.countFromEnd(2)).toStrictEqual(4);
+  });
+});
+
+describe('Testing findCenter', () => {
+  it('finds the center of a list with length of 1', () => {
+    let list = new LinkedList();
+    list.insert(1);
+    expect(list.findCenter()).toStrictEqual(1);
+  });
+  it('finds the center of a list of any length', () => {
+    let list = new LinkedList();
+    list.insert(7);
+    list.insert(6);
+    list.insert(5);
+    list.insert(4);
+    list.insert(3);
+    list.insert(2);
+    list.insert(1);
+    expect(list.findCenter()).toStrictEqual(4);
+  });
+  it('finds the value just right of center in a list with an even length', () => {
+    let list = new LinkedList();
+    list.insert(6);
+    list.insert(5);
+    list.insert(4);
+    list.insert(3);
+    list.insert(2);
+    list.insert(1);
+    expect(list.findCenter()).toStrictEqual(4);
+  });
+  it('Returns error if list is empty', () => {
+    let list = new LinkedList();
+    expect(list.findCenter()).toStrictEqual('Error: Invalid list');
   });
 });
