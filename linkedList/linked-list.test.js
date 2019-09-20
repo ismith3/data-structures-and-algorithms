@@ -40,6 +40,22 @@ class LinkedList {
     return arr;
   }
 
+  toString() {
+    let string = '';
+    let Current = this.Head;
+
+    while(Current !== null) {
+      if(Current === this.Head) {
+        string = string + Current.Value;
+        Current = Current.Next;
+      } else {
+        string = string + ', ' + Current.Value;
+        Current = Current.Next;
+      }
+    }
+    return string;
+  }
+
   append(value) {
     let newNode = new ListNode(value);
     let Current = this.Head;
@@ -323,5 +339,22 @@ describe('Testing findCenter', () => {
   it('Returns error if list is empty', () => {
     let list = new LinkedList();
     expect(list.findCenter()).toStrictEqual('Error: Invalid list');
+  });
+});
+
+describe('Testing toString', () => {
+  it('Returns a string of all nodes in the list', () => {
+    let list = new LinkedList();
+    list.insert(6);
+    list.insert(5);
+    list.insert(4);
+    list.insert(3);
+    list.insert(2);
+    list.insert(1);
+    expect(list.toString()).toStrictEqual('1, 2, 3, 4, 5, 6');
+  });
+  it('Returns an empty string when passed in an empty linked list', () => {
+    let list = new LinkedList();
+    expect(list.toString()).toStrictEqual('');
   });
 });
