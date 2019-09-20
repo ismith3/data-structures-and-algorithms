@@ -1,10 +1,6 @@
-# Reverse an Array
+## Linked List
 
-## Challenge
-Write a function that reverses an array so that the initial values are in reverse order (without using built-in array methods).
+https://github.com/ismith3/data-structures-and-algorithms/pull/38
 
-## Approach & Efficiency
-We wrote a 'for' loop that works it's way from the outside of the array in, switches the values, and adds it to a new array. It is fairly efficient and loops through as many times as half the length of the array.
+https://travis-ci.com/ismith3/data-structures-and-algorithms/builds/128562697
 
-## Solution
-![hello](../master/assets/reverse-array.jpg)
