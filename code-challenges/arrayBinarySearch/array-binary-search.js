@@ -6,30 +6,20 @@ let binarySearch = (array,key) => {
   let right = array.length -1;
 
   while(key !== array[middle]) {
-    console.log('the middle is ', middle);
-    console.log('the left is ', left);
-    console.log('the right is ', right);
     if (left === middle) {
       return -1;
     }
     else if (key < array[middle]) {
-      console.log('less than');
       right = middle;
       middle = Math.floor((right-left)/2 + left); //(4 - 0)/2 + 0 = 3
     }
     else if (key > array[middle]) {
-      console.log('greater than');
       left = middle;
       middle = Math.ceil((right-left)/2 + left);
     }
   }
-  console.log('Ive been reached the middle is', middle);
   return middle;
 };
-
-let array = [1,2,3,4,5,6,7,8,9];
-let key = 10;
-console.log(binarySearch(array,key));
 
 describe('Testing Binary Search', () => {
   it('given an array, return index of matched key', () => {
