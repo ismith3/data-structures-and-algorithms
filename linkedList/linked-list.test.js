@@ -170,6 +170,34 @@ class LinkedList {
   }
 }
 
+function merge(list1, list2) {
+  let result = list1;
+
+  let pointer1 = result.Head;
+  let pointer2 = list2.Head;
+
+  let max = 0;
+  let temp;
+
+  if(list1.length <= list2.length) {
+    max = list2.length * 2;
+  } else {
+    max = list1.length * 2;
+  }
+
+  for(let i = 0; i < max; i++) {
+    if(!i % 2) {
+      pointer1 = pointer1.Next;
+      console.log('list 1');
+    } else {
+      
+      console.log('list 2');
+    }
+  }
+  console.log(result);
+  return result;
+}
+
 class ListNode {
   constructor(value) {
     this.Value = value;
@@ -356,5 +384,18 @@ describe('Testing toString', () => {
   it('Returns an empty string when passed in an empty linked list', () => {
     let list = new LinkedList();
     expect(list.toString()).toStrictEqual('');
+  });
+});
+
+describe('Testing merge', () => {
+  it('returns a new list that starts with list 1', () => {
+    let list1 = new LinkedList();
+    list1.insert(2);
+    list1.insert(1);
+    let list2 = new LinkedList();
+    list2.insert(3);
+    expect(merge(list1, list2).Head.Value).toEqual(1);
+    expect(merge(list1, list2).Head.Next.Value).toEqual(3);
+    expect(merge(list1, list2).Head.Next.Next.Value).toEqual(1);
   });
 });
