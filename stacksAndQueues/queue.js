@@ -77,3 +77,5 @@ describe('Testing Queue implementation', () => {
     expect(queue2.peek()).toBeNull();
   });
 });
+
+module.exports = Queue;
