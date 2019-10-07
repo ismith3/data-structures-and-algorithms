@@ -54,6 +54,27 @@ class Tree {
       result.push(node.value);
     }
   }
+
+  fizzBuzz() {
+    let result = [];
+    preOrderVisit(this.root);
+    return result;
+
+    function preOrderVisit(node) {
+      if(!node)
+        return;
+      else if(node.value % 15 === 0) {
+        node.value = 'FizzBuzz';
+      } else if(node.value % 3 === 0) {
+        node.value = 'Fizz';
+      } else if(node.value % 5 === 0) {
+        node.value = 'Buzz';
+      }
+
+      preOrderVisit(node.left);
+      preOrderVisit(node.right);
+    }
+  }
 }
 
 class TreeNode {
