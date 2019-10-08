@@ -23,7 +23,9 @@ class Queue {
     let dequeued = this.front;
     if(this.front) {
       this.front = this.front.next;
-      this.front.prev = null;
+      if(this.front) {
+        this.front.prev = null;
+      }
       return dequeued.value;
     }
     return dequeued.value;
