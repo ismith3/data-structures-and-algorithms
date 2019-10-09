@@ -98,6 +98,28 @@ class Tree {
     }
     return;
   }
+
+  findMax() {
+    let max = null;
+    preOrderVisit(this.root);
+    return max;
+
+    function preOrderVisit(node) {
+      if(!node)
+        return;
+
+      if(!max) {
+        max = node.value;
+      } else {
+        if(node.value > max) {
+          max = node.value;
+        }
+      }
+
+      preOrderVisit(node.left);
+      preOrderVisit(node.right);
+    }
+  }
 }
 
 class TreeNode {
@@ -109,7 +131,8 @@ class TreeNode {
 }
 
 function plantTree(content) {
-  // this is just for testing so the content of the tree can be edited with just an array
+  // this is just for testing so the content of the tree can be
+  // edited with just an array
   let tree = new Tree();
   tree.root = new TreeNode(content[0]);
   tree.root.left = new TreeNode(content[1]);
@@ -160,5 +183,13 @@ describe('testing breadth-first search', () => {
     // for(let i = 0; i < content2.length; i++) {
     //   expect(console.log).toHaveBeenNthCalledWith(i + 1, content2[i]);
     // }
+  });
+});
+
+describe('testing findMax()', () => {
+  it('returns the max value in a tree', () => {
+    let content = [2,34,5,69,23,12,52];
+    let tree = plantTree(content);
+    expect(tree.findMax()).toEqual(69);
   });
 });
