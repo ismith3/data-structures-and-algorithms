@@ -50,4 +50,7 @@ describe('Testing graph implementation', () => {
     graph.addNode(4);
     expect(graph.size()).toEqual(4);
   });
+  it('can conduct a depth-first preorder traversal of a graph', () => {
+
+  });
 });
