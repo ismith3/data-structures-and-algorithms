@@ -2,35 +2,28 @@
 
 class StackQueue {
   constructor() {
-    this.currentStack = 1;
-    this.stack1 = new Stack();
-    this.stack2 = new Stack();
+    this.enStack = new Stack();
+    this.deStack = new Stack();
   }
 
   enqueue(value) {
-    if(this.currentStack === 1) {
-      let currrent = this.stack1.top;
-      while(current.next) {
-        this.stack2.push(current.value);
-        current = current.next;
-        this.stack1.pop();
-      }
-    }
-    this.stack2.push(value);
-    let current = this.stack2.top();
-    while(current.next) {
-      this.stack1.push(current.value);
+    let current = this.deStack.top;
+    while(current !== null) {
+      let popped = this.deStack.pop();
+      this.enStack.push(popped);
       current = current.next;
-      this.stack2.pop();
     }
-    return this.stack1;
+    return this.enStack.push(value);
   }
 
   dequeue() {
-    if(this.currentStack === 1) {
-      return this.stack1.pop();
-      
+    let current = this.enStack.top;
+    while(current !== null) {
+      let popped = this.enStack.pop();
+      this.deStack.push(popped);
+      current = current.next;
     }
+    return this.deStack.pop();
   }
 }
 
@@ -45,6 +38,7 @@ class Stack {
       node.next = this.top;
     }
     this.top = node;
+    return node;
   }
 
   pop() {
@@ -106,9 +100,24 @@ describe('Testing Stack implementation', () => {
 describe('Testing Stack Queue', () => {
   it('can enqueue nodes', () => {
     let queue = new StackQueue();
-    console.log(queue.enqueue(1));
-    expect(queue.stack1.top.value).toStrictEqual(1);
+    queue.enqueue(1);
+    expect(queue.enStack.top.value).toStrictEqual(1);
     queue.enqueue(2);
-    expect(queue.stack1.top.next.value).toStrictEqual(2);
+    expect(queue.enStack.top.value).toStrictEqual(2);
+  });
+  it('can dequeue nodes', () => {
+    let queue = new StackQueue();
+    queue.enqueue(1);
+    queue.enqueue(2);
+    expect(queue.dequeue()).toStrictEqual(1);
+  });
+  it('can re-enqueue nodes after a dequeue', () => {
+    let queue = new StackQueue();
+    queue.enqueue(1);
+    queue.enqueue(2);
+    queue.enqueue(3);
+    queue.dequeue();
+    queue.enqueue(4);
+    expect(queue.enStack.top.next.next.value).toStrictEqual(2);
   });
 });
