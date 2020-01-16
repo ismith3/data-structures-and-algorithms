@@ -1,1 +1,1 @@
-# Blog Notes: Insertion Sort
+*Blog Notes: Insertion Sort
